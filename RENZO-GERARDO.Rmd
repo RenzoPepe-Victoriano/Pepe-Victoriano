@@ -1,0 +1,44 @@
+---
+title: "Análisis de datos"
+author: "Renzo-Pepe-Victoriano"
+date: "19/10/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+install.packages("readxl")
+install.packages("dplyr")
+install.packages("ggplot2")
+
+library(readxl)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+truchas <- read_excel ("datos_truchas1.xlsx", sheet = 1)
+```
+
+```{r}
+hist (truchas$AMONIACO, main = "Datos de Amoniaco", xlab = "Concentración de Amoniaco (mg/L)", ylab = "Frecuencia")
+
+hist(truchas$OXIGENO, main = "Datos de Oxigeno Disuelto", xlab = "Concentración de Oxigeno Disuelto (mg/L)", ylab = "Frecuencia")
+
+hist(truchas$TEMPERATURA, main = "Datos de Temperatura", xlab = "Temperatura ºC", ylab = "Frecuencia")
+
+```
+```{r}
+str(truchas$AMONIACO)
+table(truchas$AMONIACO)
+str(truchas$OXIGENO)
+table(truchas$OXIGENO)
+str(truchas$TEMPERATURA)
+table(truchas$TEMPERATURA)
+## TODOS LOS DATOS ESTAN BALANCEADOS
+```
+
+
