@@ -31,14 +31,56 @@ hist(truchas$OXIGENO, main = "Datos de Oxigeno Disuelto", xlab = "Concentración
 hist(truchas$TEMPERATURA, main = "Datos de Temperatura", xlab = "Temperatura ºC", ylab = "Frecuencia")
 
 ```
+
 ```{r}
-str(truchas$AMONIACO)
-table(truchas$AMONIACO)
-str(truchas$OXIGENO)
-table(truchas$OXIGENO)
-str(truchas$TEMPERATURA)
-table(truchas$TEMPERATURA)
-## TODOS LOS DATOS ESTAN BALANCEADOS
+
+tablat<-truchas%>%
+  filter(ESTANQUES=="DECANTADOR")%>%
+  summarize(mean(TEMPERATURA),sd(TEMPERATURA),max(TEMPERATURA),min(TEMPERATURA))
+knitr::kable(tablat,caption = "Estadisticos Descriptivos")
+
+tablao<-truchas%>%
+  filter(ESTANQUES=="DECANTADOR")%>%
+  summarize(mean(OXIGENO),sd(OXIGENO),max(OXIGENO),min(OXIGENO))
+knitr::kable(tablao,caption = "Estadisticos Descriptivos")
+
+tablaa<-truchas%>%
+  filter(ESTANQUES=="DECANTADOR")%>%
+  summarize(mean(AMONIACO),sd(AMONIACO),max(AMONIACO),min(AMONIACO))
+knitr::kable(tablaa,caption = "Estadisticos Descriptivos")
 ```
+
+```{r}
+cor(truchas$AMONIACO,truchas$OXIGENO)
+plot(truchas$AMONIACO~truchas$OXIGENO)
+# NO EXISTE CORRELACION
+
+```
+
+```{r}
+boxplot (truchas$AMONIACO ~truchas$ESTANQUES, main = "Datos de Amoniaco", xlab = "Concentración de Amoniaco (mg/L)", ylab = "Frecuencia")
+
+# EN LA GRAFICA DE AMONIACO, EN EL ESTANQUE ACOPIO SE APRECIA UN DATO ATIPICO #
+
+boxplot (truchas$OXIGENO ~truchas$ESTANQUES, main = "Datos de Oxigeno Disuelto", xlab = "Concentración de Oxigeno Disuelto (mg/L)", ylab = "Frecuencia")
+
+boxplot (truchas$TEMPERATURA ~truchas$ESTANQUES, main = "Datos de Temperatura", xlab = "Temperatura ºC", ylab = "Frecuencia")
+```
+
+```{r}
+summary(truchas)
+str(truchas$TEMPERATURA)
+str(truchas$OXIGENO)
+str(truchas$AMONIACO)
+table(truchas$TEMPERATURA)
+table(truchas$OXIGENO)
+table(truchas$AMONIACO)
+
+# TODOS LOS DATOS ESTAN BALANCEADOS
+```
+
+
+
+
 
 
